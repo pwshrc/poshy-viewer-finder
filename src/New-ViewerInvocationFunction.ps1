@@ -1,5 +1,4 @@
 #!/usr/bin/env pwsh
-#Requires -Version 7.3
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
@@ -71,21 +70,46 @@ function New-ViewerInvocationFunction {
                     return
                 }
                 $steppablePipeline = $scriptCmd.GetSteppablePipeline($myInvocation.CommandOrigin)
-                $steppablePipeline.Begin($PSCmdlet)
+                $cleaned = $false
+                try {
+                    $steppablePipeline.Begin($PSCmdlet)
+                }
+                catch {
+                    if (-not $cleaned) {
+                        if ($null -ne $steppablePipeline) {
+                            $steppablePipeline.Clean()
+                        }
+                        $cleaned = $true
+                    }
+                }
             }
             Process {
-                if ($MyInvocation.ExpectingInput -or $PSCmdlet.ParameterSetName -eq "InputObject") {
-                    $steppablePipeline.Process($_)
-                } else {
-                    $steppablePipeline.Process()
+                try {
+                    if ($MyInvocation.ExpectingInput -or $PSCmdlet.ParameterSetName -eq "InputObject") {
+                        $steppablePipeline.Process($_)
+                    } else {
+                        $steppablePipeline.Process()
+                    }
+                }
+                catch {
+                    if (-not $cleaned) {
+                        if ($null -ne $steppablePipeline) {
+                            $steppablePipeline.Clean()
+                        }
+                        $cleaned = $true
+                    }
                 }
             }
             End {
-                $steppablePipeline.End()
-            }
-            Clean {
-                if ($null -ne $steppablePipeline) {
-                    $steppablePipeline.Clean()
+                try {
+                    $steppablePipeline.End()
+                } finally {
+                    if (-not $cleaned) {
+                        if ($null -ne $steppablePipeline) {
+                            $steppablePipeline.Clean()
+                        }
+                        $cleaned = $true
+                    }
                 }
             }
         }.GetNewClosure() -Options AllScope -Force:$Force
