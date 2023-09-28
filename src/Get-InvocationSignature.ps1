@@ -3,6 +3,14 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
+<#
+.SYNOPSIS
+    Outputs the unique invocation signature for a given binary and arguments.
+.DESCRIPTION
+    Outputs the unique invocation signature for a given binary and arguments - which is a base36-encoded MD5 hash of the binary and arguments.
+.OUTPUTS
+
+#>
 function Get-InvocationSignature {
     param(
         [Parameter(Mandatory = $true, Position = 0)]

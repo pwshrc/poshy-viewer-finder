@@ -3,6 +3,19 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
+<#
+.SYNOPSIS
+    Formats a string that can be used to invoke a file-viewing binary from within a POSIX shell.
+.DESCRIPTION
+    Formats a string that can be used to invoke a file-viewing binary from within a POSIX shell.
+    Useful for populating environment variables.
+.PARAMETER Bin
+    The path to the binary to execute.
+.PARAMETER BinArgs
+    The arguments to pass to the binary.
+.OUTPUTS
+    A string that can be used to invoke a file-viewing binary from within a POSIX shell.
+#>
 function Format-ViewerInvocationSh {
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]

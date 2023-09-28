@@ -3,6 +3,24 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
+<#
+.SYNOPSIS
+    Creates a new wrapper function that invokes a binary with the given arguments.
+.PARAMETER FunctionName
+    The name of the function to create.
+.PARAMETER Bin
+    The path to the binary to invoke.
+.PARAMETER AcceptsInputPiped
+    Whether the function accepts input from the pipeline.
+.PARAMETER Force
+    Whether to overwrite an existing function.
+.PARAMETER PassThru
+    Whether to return the function object.
+.PARAMETER BinArgs
+    The arguments to pass to the binary.
+.OUTPUTS
+    A new wrapper function that invokes a binary with the given arguments.
+#>
 function New-ViewerInvocationFunction {
     param(
         [Parameter(Mandatory = $true, Position = 0, HelpMessage = "The name of the function to create.")]

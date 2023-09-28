@@ -3,6 +3,28 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
+<#
+.SYNOPSIS
+    Outputs information about available file viewers, constrained & configured by the parameters.
+.OUTPUTS
+    [System.Management.Automation.PSObject[]]
+    An array of PSObjects with the following properties:
+        Id (string) - A unique identifier for the viewer, accounting for the given parameterization.
+        Name (string) - The name of the viewer.
+        Bin (string) - The path to the viewer's executable.
+        BinArgs (string[]) - The arguments to pass to the viewer's executable.
+        AcceptsInputPiped (bool) - Whether the viewer can accept input via the pipeline.
+        AlwaysPages (bool) - Whether the viewer always pages output.
+        NeverPages (bool) - Whether the viewer never pages output.
+        ShortPageEarlyExit (bool) - Whether the viewer exits immediately after opening the file when the file can fit on one screen.
+        MayPage (bool) - Whether the viewer may page output.
+        MayUseExternalPager (bool) - Whether the viewer may use an external pager (e.g. $Env:PAGER) when/if it pages output.
+        NeverUsesExternalPager (bool) - Whether the viewer never uses an external pager (e.g. $Env:PAGER) when/if it pages output.
+        TerminalWaitsUntilExit (bool) - Whether the viewer blocks execution until it terminates.
+        AnsiPassThru (bool) - Whether the viewer correctly renders ANSI output when ANSI is present in the input.
+        ShowLineNumbers (bool) - Whether the viewer shows line numbers.
+        BinEnv (hashtable) - A hashtable of environment variables to set when invoking the viewer.
+#>
 function Get-Viewer {
     [CmdletBinding(DefaultParameterSetName="AllApps")]
     param(

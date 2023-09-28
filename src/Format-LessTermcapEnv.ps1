@@ -3,6 +3,50 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
+<#
+.SYNOPSIS
+    Outputs a hashtable of environment variables that can be used to configure the `less` pager to display text with ANSI escape sequences.
+.PARAMETER NaiveDefaults
+    If specified, the default values for the termcap environment variables will be set to some naive defaults.
+.PARAMETER BlankDefaults
+    If specified, the default values for the termcap environment variables will be set to blank strings.
+.PARAMETER NullDefaults
+    If specified, the default values for the termcap environment variables will be set to $null.
+.PARAMETER BlinkOn
+    Specifies the ANSI escape sequence to turn on blinking text.
+.PARAMETER BoldOn
+    Specifies the ANSI escape sequence to turn on bold text.
+.PARAMETER BoldOffBlinkOffUnderlineOff
+    Specifies the ANSI escape sequence to turn off bold, blinking, and underlined text.
+.PARAMETER StandoutOn
+    Specifies the ANSI escape sequence to turn on standout text.
+.PARAMETER StandoutOff
+    Specifies the ANSI escape sequence to turn off standout text.
+.PARAMETER UnderlineOn
+    Specifies the ANSI escape sequence to turn on underlined text.
+.PARAMETER UnderlineOff
+    Specifies the ANSI escape sequence to turn off underlined text.
+.PARAMETER VisualBell
+    Specifies the ANSI escape sequence to emit a visual bell.
+.PARAMETER KeypadModeCommands
+    Specifies the ANSI escape sequence to make the keypad send commands.
+.PARAMETER KeypadModeDigits
+    Specifies the ANSI escape sequence to make the keypad send digits.
+.PARAMETER ReverseVideoOn
+    Specifies the ANSI escape sequence to turn on reverse video.
+.PARAMETER HalfBrightOn
+    Specifies the ANSI escape sequence to turn on half-bright mode.
+.PARAMETER SubscriptOn
+    Specifies the ANSI escape sequence to turn on subscript mode.
+.PARAMETER SubscriptOff
+    Specifies the ANSI escape sequence to turn off subscript mode.
+.PARAMETER SuperscriptOn
+    Specifies the ANSI escape sequence to turn on superscript mode.
+.PARAMETER SuperscriptOff
+    Specifies the ANSI escape sequence to turn off superscript mode.
+.OUTPUTS
+    A hashtable of environment variables that can be used to configure the `less` pager to display text with ANSI escape sequences.
+#>
 function Format-LessTermcapEnv {
     param(
         [Parameter(Mandatory = $true, ParameterSetName = "NaiveDefaults")]

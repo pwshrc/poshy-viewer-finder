@@ -3,6 +3,16 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
+<#
+.SYNOPSIS
+    Outputs the list of options supported by nano on this host.
+.OUTPUTS
+    System.Object[]
+    An array of objects with the following properties:
+    - SyntaxShort: The short syntax for the option.
+    - SyntaxLong: The long syntax for the option.
+    - Description: The description of the option.
+#>
 function Get-NanoOptionList {
     if (Get-Variable -Name "NanoOptions" -Scope Global -ErrorAction Ignore) {
         return $global:NanoOptions

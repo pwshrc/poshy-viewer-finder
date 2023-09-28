@@ -3,6 +3,40 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 
+<#
+.SYNOPSIS
+    Gets a string that configures batcat's output style.
+.PARAMETER InputObject
+    The string to parse for the starting value of the output style configuration.
+.PARAMETER Set_Auto
+    Enables the "auto" output style, which is the default.
+.PARAMETER Set_Full
+    Enables the "full" output style.
+.PARAMETER Set_Plain
+    Sets the output style to "plain", which disables all other output style options.
+.PARAMETER Add_Changes
+    Enables the "changes" output style option.
+.PARAMETER Remove_Changes
+    Disables the "changes" output style option.
+.PARAMETER Add_Header
+    Enables the "header" output style option.
+.PARAMETER Remove_Header
+    Disables the "header" output style option.
+.PARAMETER Add_Grid
+    Enables the "grid" output style option.
+.PARAMETER Remove_Grid
+    Disables the "grid" output style option.
+.PARAMETER Add_Numbers
+    Enables the "numbers" output style option.
+.PARAMETER Remove_Numbers
+    Disables the "numbers" output style option.
+.PARAMETER Add_Snip
+    Enables the "snip" output style option.
+.PARAMETER Remove_Snip
+    Disables the "snip" output style option.
+.OUTPUTS
+    A string that configures batcat's output style.
+#>
 function Format-BatcatStyle {
     [CmdletBinding(DefaultParameterSetName = 'OnlyParseAndSimplifyGiven')]
     param(
