@@ -81,6 +81,7 @@ function Get-Viewer-Notepad {
         [string[]] $argsToUse = @()
         [System.Collections.Immutable.ImmutableDictionary[string,string]] $binEnv = [System.Collections.Immutable.ImmutableDictionary[string,string]]::Empty
         [string] $notepad_bin = (Search-CommandPathMemoized "notepad")
+        $IsWSL = (Get-Variable -Name IsWSL -ValueOnly -ErrorAction SilentlyContinue) -or (Test-Path Env:\WSL_DISTRO_NAME -ErrorAction SilentlyContinue)
         if ($notepad_bin) {
             [string] $invocationSignature = (Get-InvocationSignature $notepad_bin @argsToUse)
             $argsToUse = [System.Collections.Immutable.ImmutableList]::Create($argsToUse)
